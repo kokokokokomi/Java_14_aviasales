@@ -10,22 +10,34 @@ import lombok.NoArgsConstructor;
 @Data
 public class TicketsOfferManager {
     private TicketsOffer[] items = new TicketsOffer[0];
+    private TicketsOfferRepository repository;
 
-    public TicketsOffer findByDepartureAirport(String departureAirport) {
+    public TicketsOfferManager(TicketsOfferRepository repository){
+        this.repository = repository;
+    }
+
+    public TicketsOffer findByDepartureAirport(String from) {
             for (TicketsOffer item : items) {
-                if (item.getDepartureAirport() == departureAirport) {
+                if (item.getFrom().equals(from)) { // if (item.getDepartureAirport() == departureAirport)
                     return item;
                 }
             }
             return null;
     }
 
-    public TicketsOffer findByArrivalAirport(String arrivalAirport) {
+    public TicketsOffer findByArrivalAirport(String to) {
         for (TicketsOffer item : items) {
-            if (item.getArrivalAirport() == arrivalAirport) {
+            if (item.getTo().equals(to)) {
                 return item;
             }
         }
         return null;
+    }
+
+    public TicketsOffer[] findAllWithParams(String from, String to) {
+        if (findByDepartureAirport()) {
+            return items;
+        }
+        return findByArrivalAirport();
     }
 }

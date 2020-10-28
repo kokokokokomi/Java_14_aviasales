@@ -1,9 +1,12 @@
 package ru.netology.manager;
 import ru.netology.domain.TicketsOffer;
+import ru.netology.domain.TicketsOfferComparator;
 import ru.netology.repository.TicketsOfferRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Comparator;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,7 +37,7 @@ public class TicketsOfferManager {
         return null;
     }
 
-    public TicketsOffer[] findAllWithParams(String from, String to) {
+    public TicketsOffer[] findAllWithParams(String from, String to, Comparator<TicketsOffer> comparator) {
         if (findByDepartureAirport()) {
             return items;
         }

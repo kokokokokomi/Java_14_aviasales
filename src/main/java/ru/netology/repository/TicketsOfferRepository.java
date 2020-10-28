@@ -1,5 +1,6 @@
 package ru.netology.repository;
 import ru.netology.domain.TicketsOffer;
+import ru.netology.domain.TicketsOfferComparator;
 import ru.netology.manager.TicketsOfferManager;
 import lombok.AllArgsConstructor;
 import lombok.Data;

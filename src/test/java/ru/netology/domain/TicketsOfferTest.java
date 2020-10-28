@@ -7,12 +7,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.manager.TicketsOfferManager;
 import ru.netology.repository.TicketsOfferRepository;
+import ru.netology.domain.TicketsOfferComparator;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 class TicketsOfferTest {
     TicketsOfferRepository repository = new TicketsOfferRepository();
     TicketsOfferManager manager = new TicketsOfferManager(repository);
+    TicketsOfferComparator comparator = new TicketsOfferComparator(repository);
 
     private TicketsOffer first = new TicketsOffer(1, 1299, "SVO", "KZN", 95);
     private TicketsOffer second = new TicketsOffer(2, 2199, "VKO", "KZN", 100);
@@ -41,27 +44,27 @@ class TicketsOfferTest {
 
     @Test
     public void shouldFindAllWithParams1(){
-        TicketsOffer[] expected = manager.findAllWithParams("SCW", "VKO");
+        TicketsOffer[] expected = manager.findAllWithParams("SCW", "VKO", comparator);
         TicketsOffer[] actual = new TicketsOffer[]{third};
-        Arrays.sort(actual);
+        Arrays.sort(actual, comparator);
         assertArrayEquals(expected, actual);
     }
 
     public void shouldFindAllWithParams2(){
-        TicketsOffer[] expected = manager.findAllWithParams("SVO", "KZN");
+        TicketsOffer[] expected = manager.findAllWithParams("SVO", "KZN", comparator);
         TicketsOffer[] actual = new TicketsOffer[]{first, sixth};
         Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 
     @Test void shouldFindAllWithParamsIfNotExist(){
-        TicketsOffer[] expected = manager.findAllWithParams("VKO", "SCW");
+        TicketsOffer[] expected = manager.findAllWithParams("VKO", "SCW", comparator);
         TicketsOffer[] actual = new TicketsOffer[]{null};
         assertArrayEquals(expected, actual);
     }
 
     @Test void shouldFindAllWithParamsIfSameDestination(){
-        TicketsOffer[] expected = manager.findAllWithParams("VKO", "VKO");
+        TicketsOffer[] expected = manager.findAllWithParams("VKO", "VKO", comparator);
         TicketsOffer[] actual = new TicketsOffer[]{null};
         assertArrayEquals(expected, actual);
     }

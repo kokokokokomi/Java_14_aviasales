@@ -4,6 +4,7 @@ import ru.netology.repository.TicketsOfferRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.Arrays;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,9 +36,15 @@ public class TicketsOfferManager {
     }
 
     public TicketsOffer[] findAllWithParams(String from, String to) {
-        if (findByDepartureAirport()) {
-            return items;
+        for (TicketsOffer item : items) {
+            if (item.getFrom().equals(from)) {
+                return items;
+            }
+            if (item.getTo().equals(to)) {
+                return items;
+            }
         }
-        return findByArrivalAirport();
+        Arrays.sort(items);
+        return items;
     }
 }

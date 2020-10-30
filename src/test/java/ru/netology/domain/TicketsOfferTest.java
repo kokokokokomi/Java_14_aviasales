@@ -43,14 +43,14 @@ class TicketsOfferTest {
     public void shouldFindAllWithParams1(){
         TicketsOffer[] expected = manager.findAllWithParams("SCW", "VKO");
         TicketsOffer[] actual = new TicketsOffer[]{third};
-        Arrays.sort(actual);
+        //Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 
     public void shouldFindAllWithParams2(){
         TicketsOffer[] expected = manager.findAllWithParams("SVO", "KZN");
         TicketsOffer[] actual = new TicketsOffer[]{first, sixth};
-        Arrays.sort(actual);
+        //Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 

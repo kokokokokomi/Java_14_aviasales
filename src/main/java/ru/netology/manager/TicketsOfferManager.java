@@ -35,14 +35,26 @@ public class TicketsOfferManager {
         return null;
     }
 
+    //public TicketsOffer[] getAll() {
+    //    TicketsOffer[] items = repository.findAll();
+    //    TicketsOffer[] result = new TicketsOffer[items.length];
+    //    for (int i = 0; i < result.length; i++) {
+    //        int index = items.length - i - 1;
+    //        result[i] = items[index];
+    //    }
+    //    return result;
+    //}
+
     public TicketsOffer[] findAllWithParams(String from, String to) {
-        for (TicketsOffer item : items) {
-            if (item.getFrom().equals(from)) {
-                return items;
+        //for (TicketsOffer item : items)//
+        for (TicketsOffer item : repository.findAll()) {
+            if (item.getFrom().equals(from) && item.getTo().equals(to)) {
+                TicketsOffer[] tmp = new TicketsOffer[items.length + 1];
+                System.arraycopy(items, 0, tmp, 0, items.length);
+                tmp[tmp.length - 1] = item;
+                items = tmp;
             }
-            if (item.getTo().equals(to)) {
-                return items;
-            }
+
         }
         Arrays.sort(items);
         return items;

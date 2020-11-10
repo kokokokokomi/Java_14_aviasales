@@ -28,7 +28,6 @@ class TicketsOfferTest {
     public void shouldSortByPrice() {
         TicketsOffer[] expected = new TicketsOffer[]{first, second, third};
         TicketsOffer[] actual = new TicketsOffer[]{first, second, third};
-        Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 
@@ -43,29 +42,27 @@ class TicketsOfferTest {
     }
 
     @Test
-    public void shouldFindAllWithParams1(){
+    public void shouldFindAllWithParamsIfOne(){
         TicketsOffer[] expected = manager.findAllWithParams("SCW", "VKO", comparator);
         TicketsOffer[] actual = new TicketsOffer[]{third};
-        Arrays.sort(actual, comparator);
         assertArrayEquals(expected, actual);
     }
-
-    public void shouldFindAllWithParams2(){
+    @Test
+    public void shouldFindAllWithParamsIfMoreThanOne(){
         TicketsOffer[] expected = manager.findAllWithParams("SVO", "KZN", comparator);
         TicketsOffer[] actual = new TicketsOffer[]{first, sixth};
-        Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 
     @Test void shouldFindAllWithParamsIfNotExist(){
         TicketsOffer[] expected = manager.findAllWithParams("VKO", "SCW", comparator);
-        TicketsOffer[] actual = new TicketsOffer[]{null};
+        TicketsOffer[] actual = new TicketsOffer[]{};
         assertArrayEquals(expected, actual);
     }
 
     @Test void shouldFindAllWithParamsIfSameDestination(){
         TicketsOffer[] expected = manager.findAllWithParams("VKO", "VKO", comparator);
-        TicketsOffer[] actual = new TicketsOffer[]{null};
+        TicketsOffer[] actual = new TicketsOffer[]{};
         assertArrayEquals(expected, actual);
     }
 

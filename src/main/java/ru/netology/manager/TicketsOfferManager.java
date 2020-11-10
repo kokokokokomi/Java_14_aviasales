@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Comparator;
+import java.util.Arrays;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,28 +20,17 @@ public class TicketsOfferManager {
         this.repository = repository;
     }
 
-    public TicketsOffer findByDepartureAirport(String from) {
-            for (TicketsOffer item : items) {
-                if (item.getFrom().equals(from)) { // if (item.getDepartureAirport() == departureAirport)
-                    return item;
-                }
-            }
-            return null;
-    }
-
-    public TicketsOffer findByArrivalAirport(String to) {
-        for (TicketsOffer item : items) {
-            if (item.getTo().equals(to)) {
-                return item;
-            }
-        }
-        return null;
-    }
-
     public TicketsOffer[] findAllWithParams(String from, String to, Comparator<TicketsOffer> comparator) {
-        if (findByDepartureAirport()) {
+        for (TicketsOffer item : repository.findAll()) {
+            if (item.getFrom().equals(from) && item.getTo().equals(to)) {
+                TicketsOffer[] tmp = new TicketsOffer[items.length + 1];
+                System.arraycopy(items, 0, tmp, 0, items.length);
+                tmp[tmp.length - 1] = item;
+                items = tmp;
+            }
+
+        }
+            Arrays.sort(items, comparator);
             return items;
         }
-        return findByArrivalAirport();
-    }
 }

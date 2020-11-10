@@ -1,4 +1,4 @@
-name: Aviasales CI # как называется Workflow
+name: Java CI with Maven # как называется Workflow
 
 on: [push] # когда срабатывает (на push)
 
